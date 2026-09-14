@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Auto Trainer | Car Sales Training with Paul Iacobazzi</title>
+  <meta name="description" content="Real car sales training for career changers, newcomers, and reps ready for bigger months.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a href="index.html" class="logo"><span class="logo-it">The</span> Auto <span>Trainer</span></a>
+
+      <button type="button" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="training.html">Training</a></li>
+        <li><a href="results.html">Results</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li class="nav-cta-item"><a href="contact.html" class="btn btn-primary">Book a call</a></li>
+      </ul>
+
+      <a href="contact.html" class="btn btn-outline btn-small nav-desktop-cta">Book a call</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner container">
+
+        <div class="hero-text">
+          <p class="eyebrow">Break in. Level up. Earn more.</p>
+
+          <h1 class="hero-title">Learn to <span class="accent">Earn.</span></h1>
+
+          <p class="signature">with Paul Iacobazzi</p>
+
+          <p class="hero-sub">
+            Real car sales training for career changers, newcomers,
+            and experienced reps ready to make more money.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#new-to-sales" class="btn btn-primary">I'm new to sales</a>
+            <a href="#earn-more" class="btn btn-outline">
+              I want to earn more
+              <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <img src="images/paul.jpg" alt="Paul Iacobazzi standing on a dealership lot" class="hero-photo">
+
+          <div class="badge">
+            <strong>25+ years</strong>
+            <span>on the showroom floor</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="audience" aria-label="Who this training is for">
+      <div class="audience-grid container">
+        <a href="#career-changers" class="audience-item">
+          <h2>Career changers</h2>
+          <p>New industry, proven playbook</p>
+        </a>
+        <a href="#new-to-sales" class="audience-item">
+          <h2>New to sales</h2>
+          <p>Learn the fundamentals, to succeed</p>
+        </a>
+        <a href="#earn-more" class="audience-item">
+          <h2>Experienced reps</h2>
+          <p>Learn ways to improve your sales performance</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var navLinks = document.getElementById('nav-links');
+      if (!toggle || !navLinks) return;
+
+      function closeMenu() {
+        navLinks.classList.remove('is-open');
+        toggle.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('nav-open');
+      }
+
+      toggle.addEventListener('click', function () {
+        var isOpen = navLinks.classList.toggle('is-open');
+        toggle.classList.toggle('is-open', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        document.body.classList.toggle('nav-open', isOpen);
+      });
+
+      navLinks.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') closeMenu();
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 900) closeMenu();
+      });
+    })();
+  </script>
+</body>
+</html>
