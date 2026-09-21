@@ -4,6 +4,9 @@
 :root {
   --rosso-corsa: #D40000;
   --rosso-dark: #A80000;
+  --rosso-hover: #E60000;
+  /* #D40000 tops out at ~3.8:1 on black; use this for small red text (WCAG AA 4.5:1) */
+  --rosso-text: #FF3B3B;
   --verde-italia: #008C45;
   --black: #000000;
   --charcoal: #141414;
@@ -19,6 +22,7 @@
 
   --container: 1200px;
   --radius: 8px;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* ============================================
@@ -81,7 +85,21 @@ a {
   line-height: 1;
   border: 1px solid transparent;
   white-space: nowrap;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+  transition-duration: 0.05s;
 }
 
 .btn-primary {
@@ -90,7 +108,8 @@ a {
 }
 
 .btn-primary:hover {
-  background: var(--rosso-dark);
+  background: var(--rosso-hover);
+  box-shadow: 0 8px 24px rgba(212, 0, 0, 0.35);
 }
 
 .btn-outline {
@@ -100,6 +119,7 @@ a {
 
 .btn-outline:hover {
   border-color: var(--rosso-corsa);
+  background: rgba(212, 0, 0, 0.1);
 }
 
 .btn-small {
@@ -110,6 +130,7 @@ a {
 
 .btn-small:hover {
   background: var(--rosso-corsa);
+  box-shadow: 0 6px 18px rgba(212, 0, 0, 0.3);
 }
 
 .btn-arrow {
@@ -146,7 +167,7 @@ a {
 }
 
 .logo span {
-  color: var(--rosso-corsa);
+  color: var(--rosso-text);
 }
 
 .logo .logo-it {
@@ -214,6 +235,11 @@ a {
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .nav-toggle-bar {
@@ -342,7 +368,7 @@ a {
 .badge span {
   display: block;
   margin-top: 0.25rem;
-  color: #FFD6D6;
+  color: var(--ivory);
   font-size: 0.85rem;
 }
 
@@ -396,6 +422,146 @@ a {
   margin: 0.2rem 0 0;
   color: var(--gray);
   font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.audience-item:hover p,
+.audience-item:active p {
+  color: var(--silver);
+}
+
+/* ============================================
+   Program cards
+   ============================================ */
+.program-inner {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.program-intro {
+  max-width: 56rem;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.program-intro .eyebrow {
+  justify-content: center;
+}
+
+.program-intro h2 {
+  margin: 0 0 0.875rem;
+  font-family: var(--font-display);
+  color: var(--ivory);
+  font-size: clamp(1.9rem, 4.2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.program-intro p:not(.eyebrow) {
+  max-width: 52ch;
+  margin: 0 auto;
+  color: var(--gray);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3.5rem 1.75rem;
+}
+
+.program-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.75rem;
+  padding: 3.5rem 1.875rem 1.875rem;
+  background: var(--graphite);
+  border-radius: 6px;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.program-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+}
+
+.program-card:has(a:focus-visible) {
+  outline: 2px solid var(--rosso-corsa);
+  outline-offset: 3px;
+}
+
+.program-card:has(a:focus-visible) a {
+  outline: none;
+}
+
+.program-tile {
+  position: absolute;
+  top: -1.75rem;
+  left: 1.5rem;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  background: var(--rosso-corsa);
+  color: var(--white);
+  border-radius: 6px;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.program-card:hover .program-tile {
+  transform: scale(1.06);
+  box-shadow: 0 6px 18px rgba(212, 0, 0, 0.4);
+}
+
+.program-tile svg {
+  display: block;
+  width: 26px;
+  height: 26px;
+}
+
+.program-card h3 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  color: var(--ivory);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.program-card p {
+  margin: 0 0 1.5rem;
+  color: var(--gray);
+  font-size: 0.97rem;
+  line-height: 1.62;
+}
+
+.program-card a {
+  margin-top: auto;
+  align-self: flex-start;
+  color: var(--rosso-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-thickness 0.2s ease, text-underline-offset 0.2s ease;
+}
+
+/* Stretch the link over the whole card so the full surface is the click target */
+.program-card a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.program-card:hover a {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 /* ============================================
@@ -536,6 +702,11 @@ a {
     right: 0;
     width: 100%;
   }
+
+  .program-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3.25rem 1.5rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -543,9 +714,22 @@ a {
     grid-template-columns: 1fr;
   }
 
+  /* Every row gets both side edges so the stack reads as one box;
+     border-left-color is left alone here so :hover/:active can still turn it red */
+  .audience-item {
+    border-left-color: var(--line);
+    border-right: 3px solid var(--line);
+  }
+
   .audience-item + .audience-item {
-    border-left-color: transparent;
     border-top: 1px solid var(--line);
+  }
+
+  .audience-item:hover,
+  .audience-item:active {
+    border-left-color: var(--rosso-corsa);
+    border-right-color: var(--rosso-corsa);
+    background: var(--graphite);
   }
 
   .hero-actions .btn {
@@ -595,5 +779,29 @@ a {
 
   .hero-actions {
     justify-content: center;
+  }
+
+  .program-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .program-inner {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .program-intro {
+    margin-bottom: 3rem;
+  }
+
+  .program-tile {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  .program-card a {
+    align-self: center;
   }
 }
