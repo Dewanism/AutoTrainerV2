@@ -8,6 +8,9 @@
   /* #D40000 tops out at ~3.8:1 on black; use this for small red text (WCAG AA 4.5:1) */
   --rosso-text: #FF3B3B;
   --verde-italia: #008C45;
+  /* Brighter sibling of the logo green (same hue, ~147°) for positive metrics;
+     #008C45 only clears large-text contrast on dark, this clears AA at any size */
+  --verde-text: #13B65C;
   --black: #000000;
   --charcoal: #141414;
   --graphite: #1E1E1E;
@@ -23,6 +26,19 @@
   --container: 1200px;
   --radius: 8px;
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Type scale — every size on the site comes from here */
+  --text-xs: 0.85rem;       /* micro labels, legal, inline link cues */
+  --text-sm: 0.95rem;       /* nav, footer links, captions */
+  --text-base: 1rem;        /* card body copy */
+  --text-lg: 1.0625rem;     /* section ledes, long-form prose */
+  --text-xl: 1.125rem;      /* hero subhead */
+  --h-card: 1.4rem;         /* card + list headings */
+  --h-section: clamp(1.9rem, 4.2vw, 2.75rem);
+  --h-page: clamp(3.25rem, 8vw, 6.25rem);
+  --lh-body: 1.65;
+  --lh-prose: 1.75;
+  --lh-heading: 1.15;
 }
 
 /* ============================================
@@ -187,7 +203,7 @@ a {
   display: inline-block;
   padding: 0.35rem 0;
   color: var(--gray);
-  font-size: 0.95rem;
+  font-size: var(--text-sm);
   font-weight: 500;
   transition: color 0.2s ease;
 }
@@ -297,7 +313,7 @@ a {
   margin: 0;
   font-family: var(--font-display);
   color: var(--ivory);
-  font-size: clamp(3.25rem, 8vw, 6.25rem);
+  font-size: var(--h-page);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.015em;
@@ -321,8 +337,8 @@ a {
   max-width: 34ch;
   margin: 0 0 2rem;
   color: var(--gray);
-  font-size: 1.125rem;
-  line-height: 1.7;
+  font-size: var(--text-xl);
+  line-height: var(--lh-prose);
 }
 
 .hero-actions {
@@ -369,7 +385,7 @@ a {
   display: block;
   margin-top: 0.25rem;
   color: var(--ivory);
-  font-size: 0.85rem;
+  font-size: var(--text-xs);
 }
 
 /* ============================================
@@ -414,14 +430,15 @@ a {
   margin: 0;
   font-family: var(--font-display);
   color: var(--ivory);
-  font-size: 1.4rem;
+  font-size: var(--h-card);
   font-weight: 600;
+  line-height: 1.2;
 }
 
 .audience-item p {
   margin: 0.2rem 0 0;
   color: var(--gray);
-  font-size: 0.95rem;
+  font-size: var(--text-sm);
   transition: color 0.2s ease;
 }
 
@@ -452,9 +469,9 @@ a {
   margin: 0 0 0.875rem;
   font-family: var(--font-display);
   color: var(--ivory);
-  font-size: clamp(1.9rem, 4.2vw, 2.75rem);
+  font-size: var(--h-section);
   font-weight: 700;
-  line-height: 1.14;
+  line-height: var(--lh-heading);
   letter-spacing: -0.01em;
   text-wrap: balance;
 }
@@ -463,8 +480,8 @@ a {
   max-width: 52ch;
   margin: 0 auto;
   color: var(--gray);
-  font-size: 1.0625rem;
-  line-height: 1.6;
+  font-size: var(--text-lg);
+  line-height: var(--lh-body);
 }
 
 .program-grid {
@@ -527,7 +544,7 @@ a {
   margin: 0 0 0.75rem;
   font-family: var(--font-display);
   color: var(--ivory);
-  font-size: 1.35rem;
+  font-size: var(--h-card);
   font-weight: 600;
   line-height: 1.2;
   text-wrap: balance;
@@ -536,15 +553,15 @@ a {
 .program-card p {
   margin: 0 0 1.5rem;
   color: var(--gray);
-  font-size: 0.97rem;
-  line-height: 1.62;
+  font-size: var(--text-base);
+  line-height: var(--lh-body);
 }
 
 .program-card a {
   margin-top: auto;
   align-self: flex-start;
   color: var(--rosso-text);
-  font-size: 0.85rem;
+  font-size: var(--text-xs);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -562,6 +579,137 @@ a {
 .program-card:hover a {
   text-decoration-thickness: 2px;
   text-underline-offset: 6px;
+}
+
+/* ============================================
+   Stats band
+   ============================================ */
+.stats {
+  background: var(--charcoal);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  gap: 2rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  font-family: var(--font-display);
+  color: var(--verde-text);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.stat span {
+  display: block;
+  margin-top: 0.6rem;
+  color: var(--gray);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+}
+
+/* ============================================
+   Story
+   ============================================ */
+.story-inner {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.story-intro {
+  max-width: 56rem;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.story-intro .eyebrow {
+  justify-content: center;
+}
+
+.story-intro h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  color: var(--ivory);
+  font-size: var(--h-section);
+  font-weight: 700;
+  line-height: var(--lh-heading);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.story-body {
+  max-width: 62ch;
+  margin: 0 auto;
+}
+
+/* Silver rather than gray: this is the page's primary long-form reading copy,
+   one deliberate step up the hierarchy from supporting text */
+.story-body p {
+  margin: 0 0 1.5rem;
+  color: var(--silver);
+  font-size: var(--text-lg);
+  line-height: var(--lh-prose);
+}
+
+.pull-quote {
+  margin: 3rem 0 0;
+  padding: 1.75rem 0 1.75rem 1.75rem;
+  border-left: 3px solid var(--rosso-corsa);
+}
+
+.pull-quote p {
+  margin: 0;
+  font-family: var(--font-display);
+  color: var(--ivory);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* ============================================
+   CTA band
+   ============================================ */
+.cta-band {
+  background: var(--charcoal);
+  border-top: 1px solid var(--line);
+}
+
+.cta-inner {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  text-align: center;
+}
+
+.cta-inner h2 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  color: var(--ivory);
+  font-size: var(--h-section);
+  font-weight: 700;
+  line-height: var(--lh-heading);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.cta-inner p {
+  max-width: 48ch;
+  margin: 0 auto 2rem;
+  color: var(--gray);
+  font-size: var(--text-lg);
+  line-height: var(--lh-body);
 }
 
 /* ============================================
@@ -584,7 +732,7 @@ a {
   max-width: 30ch;
   margin: 1rem 0 1.5rem;
   color: var(--gray);
-  font-size: 0.95rem;
+  font-size: var(--text-sm);
   line-height: 1.6;
 }
 
@@ -625,7 +773,7 @@ a {
   margin: 0 0 1.1rem;
   color: var(--ivory);
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: var(--text-xs);
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -643,7 +791,7 @@ a {
 
 .footer-col a {
   color: var(--gray);
-  font-size: 0.95rem;
+  font-size: var(--text-sm);
   transition: color 0.2s ease;
 }
 
@@ -658,7 +806,7 @@ a {
 .footer-col address p {
   margin: 0 0 0.75rem;
   color: var(--gray);
-  font-size: 0.95rem;
+  font-size: var(--text-sm);
   line-height: 1.6;
 }
 
@@ -679,7 +827,7 @@ a {
 .footer-bottom p {
   margin: 0;
   color: var(--gray);
-  font-size: 0.85rem;
+  font-size: var(--text-xs);
 }
 
 .footer-bottom a {
@@ -844,6 +992,11 @@ a {
   .footer-brand {
     grid-column: 1 / -1;
   }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 2rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -966,5 +1119,29 @@ a {
   .footer-bottom-inner {
     justify-content: center;
     text-align: center;
+  }
+
+  .story-inner {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .story-body p {
+    font-size: 1rem;
+  }
+
+  .pull-quote {
+    margin-top: 2.5rem;
+    padding: 1.25rem 0 1.25rem 1.25rem;
+  }
+
+  .cta-inner {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .cta-inner .btn {
+    width: 100%;
+    justify-content: center;
   }
 }
