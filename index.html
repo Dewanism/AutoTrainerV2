@@ -6,10 +6,11 @@
   <title>The Auto Trainer | Car Sales Training with Paul Iacobazzi</title>
   <meta name="description" content="Real car sales training for career changers, newcomers, and reps ready for bigger months.">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/PlayfairDisplay-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="images/paul-hero.webp" as="image" fetchpriority="high">
 
+  <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -65,7 +66,7 @@
         </div>
 
         <div class="hero-media">
-          <img src="images/paul.jpg" alt="Paul Iacobazzi standing on a dealership lot" class="hero-photo">
+          <img src="images/paul-hero.webp" alt="Paul Iacobazzi standing on a dealership lot" class="hero-photo" width="608" height="760" fetchpriority="high" decoding="async">
 
           <div class="badge">
             <strong>30 years</strong>
